@@ -1,10 +1,11 @@
-import { Input ,  Label} from '../ContactForm/ContactForm.styled';
+import { Input } from '../ContactForm/ContactForm.styled';
 import { PropTypes } from 'prop-types';
+import { FilterLabel } from './Filter.styled';
 
 export const Filter = ({ value, onFilterChange, dis }) => (
  
   <>
-    <Label>
+    <FilterLabel>
       {dis 
       ? 'List is empty . . .'
       : 'Find contacts by name'}
@@ -16,7 +17,7 @@ export const Filter = ({ value, onFilterChange, dis }) => (
         disabled={dis}
         placeholder="Name or phone to seach..."
       />
-    </Label>
+    </FilterLabel>
   </>
 );
 

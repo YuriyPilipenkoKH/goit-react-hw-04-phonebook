@@ -1,9 +1,9 @@
 import { PropTypes } from 'prop-types';
-
 import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { Input, Form, Label, ContactFormBtn } from './ContactForm.styled';
 import { iconReactHook } from 'utils/svgIcons';
+
 
 const ContactForm = ({ onSubmit }) => {
   const [name, setName] = useState('');

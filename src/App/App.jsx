@@ -22,16 +22,17 @@ const App = () => {
   }, [contacts]);
 
   const addContact = (newContact) => {
+    const {name, number} = newContact
     if (contacts.find((contact) => contact.name.toLowerCase() === newContact.name.toLowerCase())) {
-      Notiflix.Notify.failure(`${newContact.name} is already in contacts.`);
+      Notiflix.Notify.failure(`${name} is already in contacts.`);
       return;
-    } else if (contacts.find((contact) => contact.number.toString() === newContact.number)) {
-      Notiflix.Notify.failure(`${newContact.number} is already in contacts.`);
+    } else if (contacts.find((contact) => contact.number.toString() === number)) {
+      Notiflix.Notify.failure(`${number} is already in contacts.`);
       return;
     }
 
     setContacts((prevContacts) => [newContact, ...prevContacts]);
-    Notiflix.Notify.success(`${newContact.name} added.`);
+    Notiflix.Notify.success(`${name} added.`);
   };
 
   const deleteContact = (contactId, contactName) => {

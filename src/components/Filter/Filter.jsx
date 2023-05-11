@@ -14,7 +14,7 @@ export const Filter = ({ value, onFilterChange, dis }) => (
         value={value}
         onChange={onFilterChange}
         disabled={dis}
-        // placeholder="Name or phone to seach..."
+        placeholder="Name or phone to seach..."
       />
     </Label>
   </>

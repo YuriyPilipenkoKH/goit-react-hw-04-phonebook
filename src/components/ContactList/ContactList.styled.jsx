@@ -13,35 +13,7 @@ const ulAnimation = keyframes`
     }
 
 `
-// Set delay per List Item
-// @for $i from 1 through $total-items {
-//   li:nth-child(#{$i}) {
-//     animation-delay: .25s * $i;
-//   }
-// }
 
-
-
-// const StyledComponent = styled.div`
- 
-// `;
-
-// Keyframe animation
-// const fadeIn = keyframes`
-  
-//   0% {
-//     opacity: 0;
-//     top: 100px;
-//   }
-//   75% {
-//     opacity: 0.5;
-//     top: 0px;
-//   }
-//   100% {
-//     opacity: 1;
-//   }
-// ` 
-   
 
 export const List = styled.ul`
   display: flex;

@@ -74,6 +74,24 @@ export const ItemCard = styled.span`
   box-shadow: var(--shadow-four);    
 `
 
+export const EditWrapper = styled.div`
+  display: grid;
+  grid-gap: 8px;
+
+  &>input {
+    padding: 4px;
+    border-radius: 4px;
+    border: transparent;
+    background-color: var(--beige);
+    outline: none;
+
+    &:active,
+  &:focus {
+   outline: 1px solid var(--orange);
+  }
+  }
+`
+
 export const ContactContainer = styled.div`
   position: relative;
   width: 320px;
@@ -95,12 +113,42 @@ export const ContactContainer = styled.div`
     }
 `;
 
+export const BtnWrapper = styled.div`
+  display: flex;
+  gap: 8px;
+
+`
+
 export const BtnDelete = styled.button`
    ${baseLiStyles};
    justify-content: center;
-   width: 110px;
+   width: 100px;
+   /* background-color: var(--red); */
    cursor: pointer;
     transition: all 0.4s;
+    padding: 2px;
+
+  &:hover,
+  &:focus {
+    outline:none;
+    background-color: var(--red);
+    color: var(--background-color);
+    box-shadow: var(--shadow-two); 
+
+    .cardSpan{
+        color: var(--crimson);
+        box-shadow: var(--shadow-two); 
+    }
+  }
+`
+export const BtnEdit = styled.button`
+   ${baseLiStyles};
+   justify-content: center;
+   width: 100px;
+   
+   cursor: pointer;
+    transition: all 0.4s;
+    padding: 2px;
 
   &:hover,
   &:focus {

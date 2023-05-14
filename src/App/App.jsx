@@ -50,6 +50,10 @@ const App = () => {
       contact.number.toString().includes(filter)
   );
 
+  // const handleEditcontact = () => {
+
+  // }
+
   return (
     <Container>
       <Section title="Phonebook">

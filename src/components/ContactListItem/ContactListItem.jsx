@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState , useRef} from 'react';
 import { ListItem,ItemCard, BtnDelete, BtnEdit , EditWrapper,BtnWrapper} from 'components/ContactList/ContactList.styled';
 
 export default function ContactListItem( {contact, deleteContact, onEditContact}) {
@@ -7,6 +7,7 @@ const {id,name,number} = contact
 const [isEdit, setIsEdit] = useState(false)
 const [nick, setNick] = useState(name)
 const [phone, setPhone] = useState(number)
+const buttonRef = useRef(null);
 
 // const buttonRef = useRef(null);
 
@@ -22,6 +23,7 @@ const editContact  =() => {
         onEditContact(updatedContact)
     }
 
+    buttonRef.current.blur(); // Manually blur the button
   }
 
 
@@ -42,11 +44,6 @@ const handleChnge =(e) =>{
      
 }
 
- 
-
-
-
-
   return (
     <>
           <ListItem  totalItems={4}>
@@ -54,13 +51,13 @@ const handleChnge =(e) =>{
                   <EditWrapper className="edit-wrapper">
                     <input
                      type='text'
-                      name='name'
+                     name="nick"
                       value ={nick}
                        onChange={handleChnge}
                        />
                     <input
-                     type='number'  
-                     name='number'
+                      type='text'
+                      name="phone"
                      value={phone}
                       onChange={handleChnge} 
                       />
@@ -75,7 +72,7 @@ const handleChnge =(e) =>{
                   <BtnEdit
                     type="button"
                     onClick={ editContact}
-                  
+                    ref={buttonRef}
                   >
                     {isEdit ? 'Save': 'Edit'}
                   </BtnEdit>

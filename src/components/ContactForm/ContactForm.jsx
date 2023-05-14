@@ -59,6 +59,7 @@ const ContactForm = ({ onSubmit }) => {
       </Label>
       <ContactFormBtn 
       type="submit"
+    
      
       >Add contact{ iconReactHook }</ContactFormBtn>
     </Form>

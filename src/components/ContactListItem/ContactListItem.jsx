@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState,useRef } from 'react';
+import { useState } from 'react';
 import { ListItem,ItemCard, BtnDelete, BtnEdit , EditWrapper,BtnWrapper} from 'components/ContactList/ContactList.styled';
 
 export default function ContactListItem( {contact, deleteContact, onEditContact}) {
@@ -8,16 +8,22 @@ const [isEdit, setIsEdit] = useState(false)
 const [nick, setNick] = useState(name)
 const [phone, setPhone] = useState(number)
 
-const buttonRef = useRef(null);
+// const buttonRef = useRef(null);
 
+const editContact  =() => {
 
-if(isEdit){
-    const updatedContact = {
-        id,
-        name: nick,
-        number: phone,
+    setIsEdit(prev => !prev)
+    if(isEdit){
+        const updatedContact = {
+            id,
+            name: nick,
+            number: phone,
+        }
+        onEditContact(updatedContact)
     }
-}
+
+  }
+
 
 const handleChnge =(e) =>{
 
@@ -36,12 +42,7 @@ const handleChnge =(e) =>{
      
 }
 
-  const editContact  =() => {
-    buttonRef.current.blur();
-
-     setIsEdit(prev => !prev)
-    // setSelectedContactId(contactId);
-  }
+ 
 
 
 
@@ -74,15 +75,15 @@ const handleChnge =(e) =>{
                   <BtnEdit
                     type="button"
                     onClick={ editContact}
-                    ref={buttonRef}
+                  
                   >
                     {isEdit ? 'Save': 'Edit'}
-                  
                   </BtnEdit>
+
                   <BtnDelete
                     type="button"
                     onClick={() => deleteContact(id)}
-                    ref={buttonRef}
+                  
                   >
                     Delete
                   </BtnDelete>

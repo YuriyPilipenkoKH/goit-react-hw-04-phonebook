@@ -79,7 +79,7 @@ export const EditWrapper = styled.div`
   grid-gap: 8px;
 
   &>input {
-    padding: 4px;
+    padding: 4px 8px;
     border-radius: 4px;
     border: transparent;
     background-color: var(--beige);

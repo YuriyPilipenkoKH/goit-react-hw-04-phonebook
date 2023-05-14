@@ -3,9 +3,9 @@ import { List,  ContactContainer } from './ContactList.styled';
 import ContactListItem from 'components/ContactListItem/ContactListItem';
 
 
-export const ContactList = ({ options, onDeleteContact }) => {
+export const ContactList = ({ options, onDeleteContact, onEditContact}) => {
 
-  
+
   return (
     options.length !== 0 && (
       <ContactContainer>
@@ -18,6 +18,7 @@ export const ContactList = ({ options, onDeleteContact }) => {
             key={cont.id}
             contact = {cont}
            deleteContact = {onDeleteContact}
+           onEditContact ={onEditContact}
             ></ContactListItem>
             );
           })}

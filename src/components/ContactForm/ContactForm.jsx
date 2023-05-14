@@ -1,5 +1,5 @@
 import { PropTypes } from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import { nanoid } from 'nanoid';
 import { Input, Form, Label, ContactFormBtn } from './ContactForm.styled';
 import { iconReactHook } from 'utils/svgIcons';
@@ -8,6 +8,7 @@ import { iconReactHook } from 'utils/svgIcons';
 const ContactForm = ({ onSubmit }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const buttonRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value } = e.currentTarget;
@@ -19,6 +20,7 @@ const ContactForm = ({ onSubmit }) => {
   };
 
   const handleSubmit = (e) => {
+    buttonRef.current.blur();
     e.preventDefault();
     onSubmit({ id: nanoid(), name, number });
     resetForm();
@@ -55,7 +57,10 @@ const ContactForm = ({ onSubmit }) => {
           onChange={handleChange}
         />
       </Label>
-      <ContactFormBtn type="submit">Add contact{ iconReactHook }</ContactFormBtn>
+      <ContactFormBtn 
+      type="submit"
+      ref={buttonRef}
+      >Add contact{ iconReactHook }</ContactFormBtn>
     </Form>
   );
 };

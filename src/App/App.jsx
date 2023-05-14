@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Container } from '../components/container/Container';
 import { Section } from "../components/section/Section";
 import  ContactForm  from '../components/ContactForm/ContactForm';
@@ -9,6 +9,7 @@ import Notiflix from 'notiflix';
 const App = () => {
   const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState('');
+  const buttonRef = useRef(null);
 
   useEffect(() => {
     const storedContacts = localStorage.getItem('contacts');
@@ -36,6 +37,7 @@ const App = () => {
   };
 
   const deleteContact = (contactId, contactName) => {
+    buttonRef.current.blur();
     setContacts((prevContacts) => prevContacts.filter((contact) => contact.id !== contactId));
     Notiflix.Notify.warning(`${contactName} deleted.`);
   };
@@ -50,9 +52,14 @@ const App = () => {
       contact.number.toString().includes(filter)
   );
 
-  // const handleEditcontact = () => {
-
-  // }
+  const handleEditcontact = (updatedContact) => {
+    setContacts(prev => prev.map(contact => {
+      if(contact.id === updatedContact.id){
+        return updatedContact
+      }
+      return contact
+    }))
+  }
 
   return (
     <Container>
@@ -63,7 +70,11 @@ const App = () => {
       <Section title="Contacts">
         <Filter value={filter} onFilterChange={handleFilterChange} dis={contacts.length === 0} />
         {contacts.length > 0 && (
-          <ContactList options={filteredContacts} onDeleteContact={deleteContact} />
+          <ContactList 
+          options={filteredContacts}
+           onDeleteContact={deleteContact} 
+           onEditContact ={handleEditcontact}
+           />
         )}
       </Section>
     </Container>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useRef} from 'react';
 import { Container } from '../components/container/Container';
 import { Section } from "../components/section/Section";
 import  ContactForm  from '../components/ContactForm/ContactForm';
@@ -17,7 +17,7 @@ const DEFAULT_CONTACTS = [
 const App = () => {
   const [contacts, setContacts] = useLocalStorage('Contacts', DEFAULT_CONTACTS);
   const [filter, setFilter] = useState('');
-  
+  const buttonRef = useRef(null);
 
 
 
@@ -36,9 +36,15 @@ const App = () => {
   };
 
   const deleteContact = (contactId, contactName) => {
+    const shouldDelete = window.confirm(`Are you sure you want to delete ${contactName}?`);
 
-    setContacts((prevContacts) => prevContacts.filter((contact) => contact.id !== contactId));
-    Notiflix.Notify.warning(`${contactName} deleted.`);
+    if (shouldDelete) {
+      setContacts((prevContacts) => prevContacts.filter((contact) => contact.id !== contactId));
+      Notiflix.Notify.warning(`${contactName} deleted.`);
+    }
+
+
+    buttonRef.current.blur(); // Manually blur the button
   };
 
   const handleFilterChange = (e) => {
@@ -76,7 +82,7 @@ const App = () => {
           options={filteredContacts}
            onDeleteContact={deleteContact} 
            onEditContact ={handleEditcontact}
-          
+           ref={buttonRef}
            />
         )}
       </Section>

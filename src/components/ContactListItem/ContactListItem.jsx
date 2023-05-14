@@ -2,7 +2,7 @@ import React from 'react'
 import { useState , useRef} from 'react';
 import { ListItem,ItemCard, BtnDelete, BtnEdit , EditWrapper,BtnWrapper} from 'components/ContactList/ContactList.styled';
 
-export default function ContactListItem( {contact, deleteContact, onEditContact}) {
+export default function ContactListItem( {contact, deleteContact, onEditContact }) {
 const {id,name,number} = contact    
 const [isEdit, setIsEdit] = useState(false)
 const [nick, setNick] = useState(name)
@@ -79,8 +79,8 @@ const handleChnge =(e) =>{
 
                   <BtnDelete
                     type="button"
-                    onClick={() => deleteContact(id)}
-                  
+                    onClick={() => deleteContact(id, name)}
+                   
                   >
                     Delete
                   </BtnDelete>

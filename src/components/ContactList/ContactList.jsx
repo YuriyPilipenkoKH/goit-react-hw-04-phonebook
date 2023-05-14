@@ -1,9 +1,10 @@
 import { PropTypes } from 'prop-types';
+
 import { List,  ContactContainer } from './ContactList.styled';
 import ContactListItem from 'components/ContactListItem/ContactListItem';
 
 
-export const ContactList = ({ options, onDeleteContact, onEditContact}) => {
+export const ContactList = ({ options, onDeleteContact, onEditContact, ref}) => {
 
 
   return (

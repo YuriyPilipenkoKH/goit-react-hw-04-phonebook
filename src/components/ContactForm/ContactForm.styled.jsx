@@ -20,6 +20,36 @@ const baseLiStyles = css`
 `;
 export default baseLiStyles
 
+export const myRippleStyles = `
+position: relative;
+overflow: hidden;
+       
+&:active {
+  transform: scale(0.98);
+}
+
+&:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #2b02a5 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform 0.4s, opacity 1s;
+}
+
+&:active:after {
+  transform: scale(0, 0);
+  opacity: 0.3;
+  transition: 0s;
+}
+`
 
 
 export const Input = styled.input`
@@ -54,6 +84,7 @@ export const Input = styled.input`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
 
 `;
@@ -75,7 +106,8 @@ export const ContactFormBtn = styled.button`
   overflow: hidden;
   ${baseLiStyles};
 
- justify-content: space-between;
+  width: 180px;
+ justify-content: space-between; 
   /* width: 160px; */
   outline: none;
   cursor: pointer;

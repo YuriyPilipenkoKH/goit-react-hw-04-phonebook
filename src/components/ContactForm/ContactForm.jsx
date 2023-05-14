@@ -8,6 +8,7 @@ import { iconReactHook } from 'utils/svgIcons';
 const ContactForm = ({ onSubmit }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
   // const buttonRef = useRef(null);
 
   const handleChange = (e) => {

@@ -1,5 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
 import baseLiStyles from '../ContactForm/ContactForm.styled';
+import { myRippleStyles } from '../ContactForm/ContactForm.styled';
 
 const ulAnimation = keyframes`
     0% {
@@ -121,6 +122,8 @@ export const BtnWrapper = styled.div`
 
 export const BtnDelete = styled.button`
    ${baseLiStyles};
+  
+
    justify-content: center;
    width: 100px;
    /* background-color: var(--red); */
@@ -139,6 +142,7 @@ export const BtnDelete = styled.button`
         color: var(--crimson);
         box-shadow: var(--shadow-two); 
     }
+    ${myRippleStyles}
   }
 `
 export const BtnEdit = styled.button`
@@ -161,5 +165,6 @@ export const BtnEdit = styled.button`
         color: var(--crimson);
         box-shadow: var(--shadow-two); 
     }
+    ${myRippleStyles}
   }
 `

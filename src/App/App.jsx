@@ -36,12 +36,18 @@ const App = () => {
   };
 
   const deleteContact = (contactId, contactName) => {
-    const shouldDelete = window.confirm(`Are you sure you want to delete ${contactName}?`);
+   
 
-    if (shouldDelete) {
-      setContacts((prevContacts) => prevContacts.filter((contact) => contact.id !== contactId));
-      Notiflix.Notify.warning(`${contactName} deleted.`);
-    }
+    setTimeout(() => {
+      const shouldDelete = window.confirm(`Are you sure you want to delete ${contactName}?`);
+      if (shouldDelete) {
+        setContacts((prevContacts) => prevContacts.filter((contact) => contact.id !== contactId));
+        Notiflix.Notify.warning(`${contactName} deleted.`);
+      }
+    }, 700);
+          
+
+
 
     // buttonRef.current.blur(); // Manually blur the button
   };
@@ -57,12 +63,40 @@ const App = () => {
   );
 
   const handleEditcontact = (updatedContact) => {
-    setContacts(prev => prev.map(contact => {
-      if(contact.id === updatedContact.id){
-        return updatedContact
-      }
-      return contact
-    }))
+    console.log(updatedContact);
+    const {name, number} = updatedContact
+
+    if (contacts.find((contact) => contact.name.toLowerCase() === name.toLowerCase())) {
+      Notiflix.Notify.failure(`${name} is already in contacts.`);
+      return ;
+    } else if (contacts.find((contact) => contact.number.toString() === number)) {
+      Notiflix.Notify.failure(`${number} is already in contacts.`);
+      return;
+    }
+    
+  setContacts(prev => prev.map(contact => {
+    if((contact.id === updatedContact.id) ){
+    
+      Notiflix.Notify.success(`${name} updated.`);
+      return updatedContact
+    }
+ 
+    return contact
+  }))
+
+  
+
+    // if (contacts.find((contact) => contact.name.toLowerCase() === name.toLowerCase())) {
+    //   Notiflix.Notify.failure(`${name} is already in contacts.`);
+    //   console.log('name---');
+    //   return ;
+    // } else if (contacts.find((contact) => contact.number.toString() === number)) {
+    //   Notiflix.Notify.failure(`${number} is already in contacts.`);
+    //   console.log('number--');
+    //   return;
+    // }
+
+
   }
 
   return (

@@ -25,7 +25,7 @@ const editContact  =() => {
         }
          window.confirm(`Are you sure you want to updated ${name}?`);
         onEditContact(updatedContact)
-        Notiflix.Notify.success(`${name} updated.`);
+       
     }
 
     buttonRef.current.blur(); // Manually blur the button

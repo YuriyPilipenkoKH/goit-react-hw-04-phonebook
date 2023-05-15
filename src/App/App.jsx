@@ -43,7 +43,6 @@ const App = () => {
       Notiflix.Notify.warning(`${contactName} deleted.`);
     }
 
-
     // buttonRef.current.blur(); // Manually blur the button
   };
 

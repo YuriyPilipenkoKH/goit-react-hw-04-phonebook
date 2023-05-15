@@ -4,7 +4,7 @@ import { List,  ContactContainer } from './ContactList.styled';
 import ContactListItem from 'components/ContactListItem/ContactListItem';
 
 
-export const ContactList = ({ options, onDeleteContact, onEditContact, ref}) => {
+export const ContactList = ({ options, onDeleteContact, onEditContact}) => {
 
 
   return (
@@ -32,4 +32,5 @@ export const ContactList = ({ options, onDeleteContact, onEditContact, ref}) => 
 ContactList.propTypes = {
   options: PropTypes.arrayOf(PropTypes.object),
   onDeleteContact: PropTypes.func,
+  onEditContact: PropTypes.func,
 };

@@ -14,12 +14,15 @@ const buttonRef = useRef(null);
 const editContact  =() => {
 
     setIsEdit(prev => !prev)
+    
+
     if(isEdit){
         const updatedContact = {
             id,
             name: nick,
             number: phone,
         }
+         window.confirm(`Are you sure you want to replace ${nick}?`);
         onEditContact(updatedContact)
     }
 

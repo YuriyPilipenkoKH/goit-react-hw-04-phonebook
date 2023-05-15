@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState , useRef} from 'react';
-import Notiflix from 'notiflix';
+// import Notiflix from 'notiflix';
 import { ListItem,ItemCard, BtnDelete, BtnEdit , EditWrapper,BtnWrapper} from 'components/ContactList/ContactList.styled';
 
 export default function ContactListItem( {contact, deleteContact, onEditContact }) {

@@ -15,7 +15,7 @@ const DEFAULT_CONTACTS = [
 ]
 
 const App = () => {
-  const [contacts, setContacts] = useLocalStorage('Contacts', DEFAULT_CONTACTS);
+  const [contacts, setContacts] = useLocalStorage('contacts', DEFAULT_CONTACTS);
   const [filter, setFilter] = useState('');
  
 
@@ -64,38 +64,38 @@ const App = () => {
 
   const handleEditcontact = (updatedContact) => {
     console.log(updatedContact);
-    const {name, number} = updatedContact
+    const {id, name, number} = updatedContact
 
-    if (contacts.find((contact) => contact.name.toLowerCase() === name.toLowerCase())) {
+    // const previousContact = contacts.filter(contact => contact.id === id)
+    // console.log('previousContact' ,previousContact);
+
+    const allExeptUpdated = contacts.filter(contact => contact.id !== id)
+    // console.log('allExeptUpdated', allExeptUpdated);
+
+
+    if (allExeptUpdated.find((contact) => contact.name.toLowerCase() === name.toLowerCase())) {
       Notiflix.Notify.failure(`${name} is already in contacts.`);
       return ;
-    } else if (contacts.find((contact) => contact.number.toString() === number)) {
+    } else if (allExeptUpdated.find((contact) => contact.number.toString() === number)) {
       Notiflix.Notify.failure(`${number} is already in contacts.`);
       return;
     }
+
+    setContacts(
+      [updatedContact, ...allExeptUpdated]
+     
+    )
+    Notiflix.Notify.success(`${name} updated.`);
+
+  // setContacts(prev => prev.map(contact => {
+  //   if((contact.id === updatedContact.id) ){
     
-  setContacts(prev => prev.map(contact => {
-    if((contact.id === updatedContact.id) ){
-    
-      Notiflix.Notify.success(`${name} updated.`);
-      return updatedContact
-    }
+  //    
+  //     return updatedContact
+  //   }
  
-    return contact
-  }))
-
-  
-
-    // if (contacts.find((contact) => contact.name.toLowerCase() === name.toLowerCase())) {
-    //   Notiflix.Notify.failure(`${name} is already in contacts.`);
-    //   console.log('name---');
-    //   return ;
-    // } else if (contacts.find((contact) => contact.number.toString() === number)) {
-    //   Notiflix.Notify.failure(`${number} is already in contacts.`);
-    //   console.log('number--');
-    //   return;
-    // }
-
+  //   return contact
+  // }))
 
   }
 

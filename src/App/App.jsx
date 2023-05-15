@@ -66,12 +66,11 @@ const App = () => {
     console.log(updatedContact);
     const {id, name, number} = updatedContact
 
-    // const previousContact = contacts.filter(contact => contact.id === id)
+    const previousContact = contacts.filter(contact => contact.id === id)
     // console.log('previousContact' ,previousContact);
 
     const allExeptUpdated = contacts.filter(contact => contact.id !== id)
     // console.log('allExeptUpdated', allExeptUpdated);
-
 
     if (allExeptUpdated.find((contact) => contact.name.toLowerCase() === name.toLowerCase())) {
       Notiflix.Notify.failure(`${name} is already in contacts.`);
@@ -85,7 +84,7 @@ const App = () => {
       [updatedContact, ...allExeptUpdated]
      
     )
-    Notiflix.Notify.success(`${name} updated.`);
+    Notiflix.Notify.success(`${previousContact[0].name} updated.`);
 
   // setContacts(prev => prev.map(contact => {
   //   if((contact.id === updatedContact.id) ){

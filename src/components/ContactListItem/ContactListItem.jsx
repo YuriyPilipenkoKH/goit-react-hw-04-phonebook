@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState , useRef} from 'react';
+import Notiflix from 'notiflix';
 import { ListItem,ItemCard, BtnDelete, BtnEdit , EditWrapper,BtnWrapper} from 'components/ContactList/ContactList.styled';
 
 export default function ContactListItem( {contact, deleteContact, onEditContact }) {
@@ -22,8 +23,9 @@ const editContact  =() => {
             name: nick,
             number: phone,
         }
-         window.confirm(`Are you sure you want to replace ${nick}?`);
+         window.confirm(`Are you sure you want to updated ${name}?`);
         onEditContact(updatedContact)
+        Notiflix.Notify.success(`${name} updated.`);
     }
 
     buttonRef.current.blur(); // Manually blur the button

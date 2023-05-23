@@ -1,7 +1,9 @@
 import React from 'react'
-import { useState , useRef} from 'react';
+import { useState , useRef, useContext} from 'react';
 // import Notiflix from 'notiflix';
 import { ListItem,ItemCard, BtnDelete, BtnEdit , EditWrapper,BtnWrapper} from 'components/ContactList/ContactList.styled';
+import { Context } from 'hooks/useContext';
+
 
 export default function ContactListItem( {contact, deleteContact, onEditContact }) {
 const {id,name,number} = contact    
@@ -9,14 +11,20 @@ const [isEdit, setIsEdit] = useState(false)
 const [nick, setNick] = useState(name)
 const [phone, setPhone] = useState(number)
 const buttonRef = useRef(null);
+const { obj } = useContext(Context)
+// console.log(obj);
 
 // const buttonRef = useRef(null);
+const itemStateUpdater = ({obj}) => {
+    // console.log('itemStateUpdater');
+    setNick(obj.name)
+   
+}
+
 
 const editContact  =() => {
 
     setIsEdit(prev => !prev)
-    
-
     if(isEdit){
         const updatedContact = {
             id,
@@ -25,12 +33,9 @@ const editContact  =() => {
         }
          window.confirm(`Are you sure you want to updated ${name}?`);
         onEditContact(updatedContact)
-       
     }
-
     buttonRef.current.blur(); // Manually blur the button
   }
-
 
 const handleChnge =(e) =>{
 
@@ -46,24 +51,23 @@ const handleChnge =(e) =>{
         default:
             break;
     }
-     
 }
 
   return (
-    <>
+   
           <ListItem  totalItems={4}>
                 {isEdit ? (
                   <EditWrapper className="edit-wrapper">
                     <input
                      type='text'
                      name="nick"
-                      value ={nick}
-                       onChange={handleChnge}
+                     value ={nick}
+                     onChange={handleChnge}
                        />
                     <input
                       type='text'
                       name="phone"
-                     value={phone}
+                      value={phone}
                       onChange={handleChnge} 
                       />
                   </EditWrapper>
@@ -91,7 +95,6 @@ const handleChnge =(e) =>{
                   </BtnDelete>
                 </BtnWrapper>
               </ListItem>
-      
-    </>
+   
   )
 }

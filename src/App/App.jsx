@@ -6,6 +6,7 @@ import { Filter } from '../components/Filter/Filter';
 import { ContactList } from '../components/ContactList/ContactList';
 import Notiflix from 'notiflix';
 import { useLocalStorage } from 'hooks/useLocalStorage';
+import { Context } from 'hooks/useContext';
 
 const DEFAULT_CONTACTS = [
   {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
@@ -17,7 +18,7 @@ const DEFAULT_CONTACTS = [
 const App = () => {
   const [contacts, setContacts] = useLocalStorage('contacts', DEFAULT_CONTACTS);
   const [filter, setFilter] = useState('');
- 
+  const [isChecked, setIsChecked] = useState(null)
 
 
 
@@ -46,9 +47,6 @@ const App = () => {
       }
     }, 700);
           
-
-
-
     // buttonRef.current.blur(); // Manually blur the button
   };
 
@@ -67,23 +65,26 @@ const App = () => {
     const {id, name, number} = updatedContact
 
     const previousContact = contacts.filter(contact => contact.id === id)
-    // console.log('previousContact' ,previousContact);
+    console.log('previousContact' ,previousContact);
 
     const allExeptUpdated = contacts.filter(contact => contact.id !== id)
-    // console.log('allExeptUpdated', allExeptUpdated);
+    console.log('allExeptUpdated', allExeptUpdated);
 
     if (allExeptUpdated.find((contact) => contact.name.toLowerCase() === name.toLowerCase())) {
       Notiflix.Notify.failure(`${name} is already in contacts.`);
-      return ;
+      // setContacts([...contacts] )
+      setIsChecked(false)
+      return;
+
     } else if (allExeptUpdated.find((contact) => contact.number.toString() === number)) {
       Notiflix.Notify.failure(`${number} is already in contacts.`);
+      setIsChecked(false)
       return;
     }
+    setIsChecked(true)
 
-    setContacts(
-      [updatedContact, ...allExeptUpdated]
-     
-    )
+    setContacts([updatedContact, ...allExeptUpdated] )
+
     Notiflix.Notify.success(`${previousContact[0].name} updated.`);
 
   // setContacts(prev => prev.map(contact => {
@@ -98,11 +99,20 @@ const App = () => {
 
   }
 
+  const obj = {
+    id: 22,
+    name: 'dart',
+    number: 1345,
+  }
+
   return (
+    <Context.Provider value={{
+       obj
+    }}>
     <Container>
       <Section title="Phonebook">
         <ContactForm 
-        onSubmit={addContact} 
+         onSubmit={addContact} 
       
         />
       </Section>
@@ -111,14 +121,15 @@ const App = () => {
         <Filter value={filter} onFilterChange={handleFilterChange} dis={contacts.length === 0} />
         {contacts.length > 0 && (
           <ContactList 
-          options={filteredContacts}
+           options={filteredContacts}
            onDeleteContact={deleteContact} 
            onEditContact ={handleEditcontact}
-         
+           onItemStateUpdate ={isChecked}
            />
         )}
       </Section>
     </Container>
+    </Context.Provider>
   );
 };
 
